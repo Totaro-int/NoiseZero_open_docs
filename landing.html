@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="소음제로 - 생활 소음 측정 및 신고 지원 모바일 앱. 실시간 소음 측정, 자동 번호판 인식, PDF 리포트 생성">
+    <meta name="keywords" content="소음측정,데시벨,층간소음,생활소음,소음신고,번호판인식,소음앱">
+    <title>소음제로 - 생활 소음, 이제 정확하게 측정하고 간편하게 신고하세요</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            color: #2c3e50;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            padding: 8px 0;
+            color: #555;
+        }
+
+        .feature-card li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            padding: 80px 20px;
+            background-color: white;
+        }
+
+        .use-cases h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 60px;
+            color: #2c3e50;
+        }
+
+        .use-case-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .use-case-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .use-case-item:hover {
+            background: #e9ecef;
+        }
+
+        .use-case-icon {
+            font-size: 2em;
+            margin-right: 20px;
+            min-width: 50px;
+        }
+
+        /* Privacy Section */
+        .privacy-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .privacy-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .privacy-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .privacy-item {
+            padding: 20px;
+        }
+
+        .privacy-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .contact-item {
+            margin: 20px 0;
+            font-size: 1.1em;
+        }
+
+        .contact-item strong {
+            color: #667eea;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .features h2,
+            .use-cases h2,
+            .privacy-section h2,
+            .contact h2 {
+                font-size: 2em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>🔇 소음제로</h1>
+            <p>생활 소음, 이제 정확하게 측정하고 간편하게 신고하세요!</p>
+            <p style="font-size: 1em; opacity: 0.9;">실시간 소음 측정(dB) + 자동 번호판 인식 + PDF 리포트 생성까지 한 번에</p>
+            <div class="download-buttons">
+                <a href="#" class="btn">🍎 App Store</a>
+                <a href="#" class="btn">📱 Google Play</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>✨ 주요 기능</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>정확한 소음 측정</h3>
+                    <ul>
+                        <li>실시간 데시벨(dB) 측정 및 그래프 시각화</li>
+                        <li>측정 데이터 자동 저장 및 관리</li>
+                        <li>시간대별 소음 변화 추적</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎥</div>
+                    <h3>스마트 증거 수집</h3>
+                    <ul>
+                        <li>소음 현장 동영상 녹화</li>
+                        <li>GPS 위치 정보 자동 기록</li>
+                        <li>측정 시간 및 환경 정보 저장</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🚗</div>
+                    <h3>AI 번호판 인식</h3>
+                    <ul>
+                        <li>차량 번호판 자동 인식 (ML Kit + Tesseract OCR)</li>
+                        <li>한국 차량 번호판 최적화</li>
+                        <li>수동 편집 및 수정 기능</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>원클릭 리포트 생성</h3>
+                    <ul>
+                        <li>전문적인 PDF 신고서 자동 생성</li>
+                        <li>소음 측정 데이터 + 사진 + 위치 정보 포함</li>
+                        <li>관할 기관 제출용 포맷</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>안전한 데이터 관리</h3>
+                    <ul>
+                        <li>오프라인 우선 저장 (인터넷 없이도 사용 가능)</li>
+                        <li>선택적 클라우드 동기화</li>
+                        <li>개인정보 보호 강화</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>직관적인 사용자 경험</h3>
+                    <ul>
+                        <li>간단한 터치로 측정 시작</li>
+                        <li>실시간 그래프 시각화</li>
+                        <li>측정 기록 관리 및 검색</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases">
+        <div class="container">
+            <h2>🎯 이런 분들께 추천합니다</h2>
+            <div class="use-case-list">
+                <div class="use-case-item">
+                    <div class="use-case-icon">🏢</div>
+                    <div>
+                        <strong>층간소음으로 고민하시는 분</strong>
+                        <p>위층 소음을 정확하게 측정하고 증거 자료를 확보하세요</p>
+                    </div>
+                </div>
+
+                <div class="use-case-item">
+                    <div class="use-case-icon">🚗</div>
+                    <div>
+                        <strong>불법 주정차 차량 소음 피해자</strong>
+                        <p>번호판을 자동으로 인식하고 신고 자료를 준비하세요</p>
+                    </div>
+                </div>
+
+                <div class="use-case-item">
+                    <div class="use-case-icon">🏗️</div>
+                    <div>
+                        <strong>공사장 소음 측정이 필요하신 분</strong>
+                        <p>시간대별 소음 변화를 기록하고 관리하세요</p>
+                    </div>
+                </div>
+
+                <div class="use-case-item">
+                    <div class="use-case-icon">📋</div>
+                    <div>
+                        <strong>정확한 소음 증거가 필요하신 분</strong>
+                        <p>GPS, 시간, 소음 수치가 모두 포함된 증거 자료를 확보하세요</p>
+                    </div>
+                </div>
+
+                <div class="use-case-item">
+                    <div class="use-case-icon">📊</div>
+                    <div>
+                        <strong>체계적인 신고 자료를 만들고 싶으신 분</strong>
+                        <p>전문적인 PDF 리포트로 신속하게 민원을 제기하세요</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section">
+        <div class="container">
+            <h2>🔐 개인정보 보호</h2>
+            <p style="font-size: 1.2em; margin-bottom: 40px;">소음제로는 사용자의 프라이버시를 최우선으로 생각합니다</p>
+
+            <div class="privacy-features">
+                <div class="privacy-item">
+                    <h3>✅ 최소한의 정보만 수집</h3>
+                    <p>이메일, 측정 데이터만 수집합니다</p>
+                </div>
+
+                <div class="privacy-item">
+                    <h3>🔒 사용자 동의 없는 공유 금지</h3>
+                    <p>제3자 데이터 공유 절대 금지</p>
+                </div>
+
+                <div class="privacy-item">
+                    <h3>📜 개인정보 보호법 완전 준수</h3>
+                    <p>법적 요구사항 100% 준수</p>
+                </div>
+
+                <div class="privacy-item">
+                    <h3>🗑️ 언제든 데이터 삭제 가능</h3>
+                    <p>회원 탈퇴 시 모든 데이터 완전 삭제</p>
+                </div>
+            </div>
+
+            <a href="privacy.html" class="btn btn-secondary" style="margin-top: 20px; display: inline-block;">개인정보 처리방침 자세히 보기</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>📞 고객 지원</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>일반 문의</strong><br>
+                    me@ptg.kr
+                </div>
+
+                <div class="contact-item">
+                    <strong>개인정보 문의</strong><br>
+                    me@ptg.kr
+                </div>
+
+                <div class="contact-item">
+                    <strong>개인정보 보호책임자</strong><br>
+                    정선우
+                </div>
+
+                <div class="contact-item">
+                    <strong>응답 시간</strong><br>
+                    평일 09:00 - 18:00 (1-2 영업일 이내)
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <a href="SUPPORT.html" class="btn">고객 지원 센터 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>소음제로 (NoiseZero)</strong></p>
+            <p>생활 소음 측정 및 신고 지원 모바일 애플리케이션</p>
+            <p style="margin-top: 20px;">
+                <a href="privacy.html">개인정보 처리방침</a> |
+                <a href="SUPPORT.html">고객 지원</a> |
+                <a href="https://github.com/Totaro-int/NoiseZero">GitHub</a>
+            </p>
+            <p style="margin-top: 30px; opacity: 0.7;">
+                © 2025 Medivu Co.,Ltd. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
